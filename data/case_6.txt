@@ -1,0 +1,5 @@
+In an earlier security incident unrelated to the current investigation, a group of hackers attempted to gain access to the exchange’s database through a SQL injection attack. The attempt was detected and blocked before any data was compromised.
+
+The attackers had used outdated exploits targeting vulnerabilities that had already been patched. Security logs indicate that the attack originated from servers in Eastern Europe.
+
+This case has no connection to the stolen cryptocurrency funds but serves as a reminder of ongoing cybersecurity threats faced by financial institutions.

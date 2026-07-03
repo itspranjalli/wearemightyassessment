@@ -1,0 +1,424 @@
+[
+  {
+    "query": "How did the hacker gain access to the exchange?",
+    "relevant": [
+      "case_1",
+      "case_3"
+    ],
+    "evidence": [
+      [
+        "case_1",
+        0.7568
+      ],
+      [
+        "case_3",
+        0.4756
+      ]
+    ],
+    "excluded": [
+      [
+        "case_6",
+        0.6731
+      ],
+      [
+        "case_7",
+        0.6515
+      ],
+      [
+        "case_8",
+        0.6212
+      ],
+      [
+        "case_4",
+        0.5715
+      ],
+      [
+        "case_2",
+        0.412
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 1.0,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": []
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_1.txt",
+        "case_3.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThe hacker gained access to the exchange through a sophisticated phishing attack targeting an employee. The attack involved a fraudulent email that led the employee to a fake login page, where their credentials were captured. Additionally, prior to the successful breach, there were multiple failed login attempts from an IP address associated with previous cyberattacks, indicating a possible credential-stuffing strategy.\n\n## Evidence Analysis\n1. **Phishing Attack**: The hacker executed a phishing attack by sending an email that appeared to come from the exchange\u2019s IT security team. This email contained a link to a fake login page that closely resembled the exchange\u2019s internal portal. The employee entered their credentials, which were then sent to the attacker. This allowed the hacker to access the employee\u2019s wallet and transfer funds shortly after obtaining the credentials. The phishing domain was registered just two days prior to the attack, indicating premeditation ([case_1.txt]).\n\n2. **Failed Login Attempts**: Security logs indicated that there were multiple failed login attempts on high-value accounts just days before the successful breach. These attempts originated from an IP address in Russia, which had been linked to previous cyberattacks against financial institutions. The logs recorded at least 20 failed attempts over three hours, suggesting the use of credential-stuffing techniques. Although the security team flagged these attempts, they did not trigger an account lockout due to the nature of the attack ([case_3.txt]).\n\n## Assessment & Leads\nThe evidence points to a two-pronged approach by the hacker: a direct phishing attack to obtain credentials and a preparatory phase involving failed login attempts using credential-stuffing techniques. Investigating the phishing domain and the IP address associated with the failed login attempts could provide further insights into the hacker's identity and methods. Additionally, reviewing the security measures in place during the time of the attack may help identify vulnerabilities that were exploited.\n\n## Evidence Gaps\nThere is no information regarding the specific security measures that were in place at the exchange at the time of the attack, nor are there details on any follow-up actions taken by the security team after the failed login attempts were flagged. Further investigation into these areas could provide a more comprehensive understanding of the breach."
+  },
+  {
+    "query": "How were the stolen funds laundered?",
+    "relevant": [
+      "case_2",
+      "case_5"
+    ],
+    "evidence": [
+      [
+        "case_2",
+        0.6557
+      ],
+      [
+        "case_5",
+        0.6488
+      ]
+    ],
+    "excluded": [
+      [
+        "case_1",
+        0.437
+      ],
+      [
+        "case_6",
+        0.4109
+      ],
+      [
+        "case_4",
+        0.4076
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 1.0,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": []
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_2.txt",
+        "case_5.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThe investigation into the laundering of stolen funds reveals a sophisticated approach utilizing blockchain technology and decentralized mixing services. The funds were initially transferred to an anonymous Solana blockchain wallet and subsequently funneled through Tornado Cash, a decentralized mixer, to obscure their origin. This multi-step process involved breaking down the total amount into smaller transactions and utilizing multiple intermediary wallets, complicating the tracking of the funds.\n\n## Evidence Analysis\n1. **Initial Transfer to Solana Wallet**: The stolen funds were moved to an anonymous Solana blockchain wallet, where they were divided into multiple smaller transactions shortly after receipt. This method is typical in money laundering, as it obscures the total amount and makes tracking more challenging. The wallet was flagged for previous fraudulent activities, indicating a known association with illicit transactions. The hacker likely employed an automated script for rapid distribution of the funds to new addresses, further complicating tracing efforts [case_2.txt].\n\n2. **Use of Tornado Cash**: Following the initial transfer, the stolen cryptocurrency was quickly funneled through Tornado Cash, a decentralized mixer designed to obscure the origin of funds. Within 30 minutes of the theft, the funds were sent into multiple Tornado Cash transactions, structured to maximize anonymity. This service redistributes funds to new addresses, making it difficult to trace back to the original transaction. Blockchain analysis identified at least five intermediary wallets that received the laundered funds before they were withdrawn via an unknown exchange, suggesting a planned strategy to cash out through peer-to-peer trading platforms [case_5.txt].\n\n## Assessment & Leads\nThe investigation should focus on:\n- Tracking the intermediary wallets identified in the Tornado Cash transactions to uncover any connections to known entities or exchanges.\n- Analyzing the automated script used for distributing the funds to determine its origin and potential links to the hacker.\n- Collaborating with blockchain analysis experts to enhance tracking capabilities on the Solana blockchain and Tornado Cash transactions.\n\n## Evidence Gaps\n- There is no information regarding the final destination of the laundered funds or the specific peer-to-peer trading platforms used for cashing out.\n- Details on the identity of the hacker or any associated individuals remain undisclosed.\n- The investigation lacks insight into the methods used to create or manage the intermediary wallets."
+  },
+  {
+    "query": "Where did the stolen cryptocurrency go after the theft?",
+    "relevant": [
+      "case_2",
+      "case_5"
+    ],
+    "evidence": [
+      [
+        "case_5",
+        0.6369
+      ],
+      [
+        "case_2",
+        0.5788
+      ]
+    ],
+    "excluded": [
+      [
+        "case_4",
+        0.5067
+      ],
+      [
+        "case_1",
+        0.4936
+      ],
+      [
+        "case_7",
+        0.4763
+      ],
+      [
+        "case_8",
+        0.4693
+      ],
+      [
+        "case_6",
+        0.4666
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 1.0,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": []
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_2.txt",
+        "case_5.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThe stolen cryptocurrency was rapidly moved through various methods to obscure its origin and facilitate laundering. Initial transfers occurred to an anonymous Solana blockchain wallet, followed by transactions through Tornado Cash, a decentralized mixer. This process involved breaking the funds into smaller amounts and funneling them through multiple intermediary wallets before being withdrawn via an unknown exchange.\n\n## Evidence Analysis\n1. **Initial Transfer**: The stolen cryptocurrency was first transferred to an anonymous Solana blockchain wallet. This wallet was flagged for its links to previous fraudulent activities, and within ten minutes, the funds were split into multiple smaller transactions to complicate tracking efforts [case_2.txt].\n\n2. **Use of Tornado Cash**: Following the initial transfer, the funds were moved through Tornado Cash, a decentralized mixer designed to obscure the origin of cryptocurrency. The exchange's security team observed that within 30 minutes of the theft, the funds were funneled into multiple transactions through Tornado Cash, ensuring maximum anonymity [case_5.txt].\n\n3. **Intermediary Wallets**: Blockchain analysis identified at least five intermediary wallets that received the laundered funds after passing through Tornado Cash. These wallets were part of a structured effort to further obscure the trail of the stolen cryptocurrency [case_5.txt].\n\n4. **Withdrawal**: The final stage involved withdrawing the funds via an unknown exchange, indicating the hacker's intent to cash out through peer-to-peer trading platforms [case_5.txt].\n\n## Assessment & Leads\nThe investigation should focus on:\n- Tracing the transactions from the Solana wallet to the intermediary wallets and identifying the unknown exchange used for withdrawal.\n- Analyzing the blockchain activity of the flagged Solana wallet to uncover any additional links to previous fraudulent activities.\n- Investigating the peer-to-peer trading platforms for any transactions that match the timeline and amounts involved in the theft.\n\n## Evidence Gaps\n- The specific identities or addresses of the unknown exchange used for the final withdrawal of the funds are not provided.\n- There is no detailed information on the intermediary wallets beyond their existence and the fact that they received laundered funds.\n- The exact amounts transferred at each stage are not specified, which could hinder the tracking of the total sum involved in the theft."
+  },
+  {
+    "query": "Was there any extortion or ransom demand after the attack?",
+    "relevant": [
+      "case_7"
+    ],
+    "evidence": [
+      [
+        "case_7",
+        0.6104
+      ]
+    ],
+    "excluded": [
+      [
+        "case_3",
+        0.4349
+      ],
+      [
+        "case_6",
+        0.4262
+      ],
+      [
+        "case_8",
+        0.4022
+      ],
+      [
+        "case_1",
+        0.3873
+      ],
+      [
+        "case_4",
+        0.3788
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 1.0,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": []
+    },
+    "citations": {
+      "has_citations": false,
+      "valid_citations": [],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 0.0
+    },
+    "report": "## Executive Summary\nThe investigation into the attack on the exchange has revealed that a ransom demand was made shortly after the incident. The demand included threats to release sensitive customer data unless payment was made in Bitcoin. The exchange did not comply with the demand and took steps to secure customer information.\n\n## Evidence Analysis\nThe evidence from document case_7.txt indicates that a ransom note was sent to the exchange's customer support team shortly after the attack. The note threatened to release sensitive customer data unless a ransom was paid within 48 hours. It included a sample of leaked customer information as proof of the breach and was sent from a temporary, encrypted email service typically used by cybercriminals. Investigators have noted that the ransom demand could be a diversionary tactic or an additional extortion attempt. The exchange's response was to not comply with the demand and to implement measures to prevent data leaks.\n\n## Assessment & Leads\nThe ransom demand provides a clear lead regarding the motivations behind the attack, suggesting that financial gain through extortion was a primary objective of the perpetrators. Further investigation into the source of the email and the sample of leaked customer data may yield additional insights into the attackers' identities and methods.\n\n## Evidence Gaps\nThere is no information regarding the identity of the attackers or any follow-up actions taken by law enforcement in response to the ransom demand. Additionally, the effectiveness of the exchange's mitigation efforts and whether any customer data was ultimately leaked remains unclear."
+  },
+  {
+    "query": "What phishing techniques were used against employees?",
+    "relevant": [
+      "case_1"
+    ],
+    "evidence": [
+      [
+        "case_1",
+        0.6043
+      ],
+      [
+        "case_3",
+        0.5479
+      ]
+    ],
+    "excluded": [
+      [
+        "case_4",
+        0.4738
+      ],
+      [
+        "case_6",
+        0.4335
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 0.6666666666666666,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": [
+        "case_3"
+      ]
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_1.txt",
+        "case_3.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThe investigation into phishing techniques used against employees revealed a sophisticated attack that exploited social engineering through a fraudulent email. The attacker successfully gained access to an employee's wallet credentials by directing them to a counterfeit login page. Additionally, there were indications of credential-stuffing attempts prior to the successful breach, suggesting a coordinated effort to compromise high-value accounts.\n\n## Evidence Analysis\n1. **Phishing Attack**: \n   - The attack began with an email impersonating the exchange's IT security team, which included a link to a fake login page that closely resembled the legitimate internal portal. The employee entered their credentials, which were then captured by the attacker ([case_1.txt]).\n   - The phishing domain was registered just two days before the attack and differed from the legitimate site by only a single character. The phishing site was taken down within 24 hours, but not before funds were transferred from the employee's wallet ([case_1.txt]).\n\n2. **Credential-Stuffing Attempts**: \n   - Prior to the successful phishing attack, there were multiple failed login attempts on high-value accounts originating from an IP address in Russia. This IP address was associated with previous cyberattacks on financial institutions ([case_3.txt]).\n   - The security logs indicated at least 20 failed login attempts over three hours, suggesting the use of credential-stuffing techniques, where attackers use email-password combinations from previous data breaches. Although these attempts were flagged by the security team, they did not trigger an account lockout due to the nature of the attack ([case_3.txt]).\n\n## Assessment & Leads\n- The phishing attack's effectiveness highlights the need for enhanced employee training on recognizing fraudulent emails and the importance of verifying links before entering credentials.\n- The IP address associated with the credential-stuffing attempts should be investigated further to identify any potential connections to the phishing attack or other security incidents.\n\n## Evidence Gaps\n- There is no information on the specific number of employees targeted or the overall impact of the phishing attack beyond the single incident mentioned.\n- Further details on the security measures in place prior to the attack and the response from the security team following the incident are not provided."
+  },
+  {
+    "query": "What do we know about the attacker's location or origin?",
+    "relevant": [
+      "case_3"
+    ],
+    "evidence": [
+      [
+        "case_3",
+        0.5156
+      ],
+      [
+        "case_6",
+        0.4804
+      ],
+      [
+        "case_1",
+        0.3772
+      ]
+    ],
+    "excluded": [
+      [
+        "case_4",
+        0.3965
+      ],
+      [
+        "case_8",
+        0.361
+      ],
+      [
+        "case_2",
+        0.3476
+      ],
+      [
+        "case_7",
+        0.3367
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 0.6666666666666666,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": [
+        "case_1",
+        "case_6"
+      ]
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_1.txt",
+        "case_3.txt",
+        "case_6.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThe investigation into the recent cyberattack on the exchange reveals that the attacker likely originated from an IP address based in Russia, which had been associated with previous cyberattacks against financial institutions. The attack involved credential-stuffing techniques, leading to the successful compromise of an employee's account. Additionally, there was a separate but unrelated security incident involving a SQL injection attack from servers in Eastern Europe. \n\n## Evidence Analysis\n1. **Attack Origin**: The security logs indicate that multiple failed login attempts were traced back to an IP address in Russia. This address had a history of being linked to prior cyberattacks on financial institutions, suggesting a pattern of malicious activity from this region [case_3.txt].\n\n2. **Login Attempts**: The attacker made at least 20 failed login attempts over three hours before successfully breaching an employee's account. The nature of these attempts suggests the use of credential-stuffing techniques, where attackers utilize stolen credentials from previous data breaches [case_3.txt].\n\n3. **Phishing Attack**: The attack was initiated through a sophisticated phishing scheme, where the attacker impersonated the exchange's IT security team. The employee was tricked into entering their credentials on a fake login page, which were then used to access their wallet [case_1.txt]. The logs from this incident indicated that the login was performed from an unfamiliar IP address, but the specific location of this IP was not detailed in the evidence [case_1.txt].\n\n4. **Unrelated Incident**: An earlier incident involving a SQL injection attack was noted, which originated from servers in Eastern Europe. However, this incident is unrelated to the current investigation concerning the stolen cryptocurrency funds [case_6.txt].\n\n## Assessment & Leads\n- The confirmed origin of the attacker's IP address in Russia provides a potential lead for further investigation into the individual or group behind the attack.\n- The use of credential-stuffing techniques indicates that the attacker may have access to a database of stolen credentials, which could be explored further to identify other potential victims or targets.\n- The phishing domain's registration shortly before the attack could lead to identifying the attacker if the domain registration details can be traced.\n\n## Evidence Gaps\n- There is insufficient information regarding the specific IP address used during the phishing attack and whether it can be linked to the same Russian IP address involved in the credential-stuffing attempts.\n- Details about the attacker\u2019s identity or further geographical origins beyond the IP address in Russia are not provided in the evidence."
+  },
+  {
+    "query": "What suspicious login activity happened before the theft?",
+    "relevant": [
+      "case_3"
+    ],
+    "evidence": [
+      [
+        "case_3",
+        0.6665
+      ],
+      [
+        "case_1",
+        0.5594
+      ]
+    ],
+    "excluded": [
+      [
+        "case_8",
+        0.5442
+      ],
+      [
+        "case_6",
+        0.5359
+      ],
+      [
+        "case_2",
+        0.4668
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 0.75,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": [
+        "case_1"
+      ]
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_1.txt",
+        "case_3.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThis report analyzes suspicious login activity preceding a theft incident involving an employee's wallet credentials. Evidence indicates multiple failed login attempts from a Russian IP address, suggesting credential-stuffing techniques were employed. Additionally, a phishing attack facilitated the theft of credentials, leading to unauthorized access and fund transfers.\n\n## Evidence Analysis\n1. **Failed Login Attempts**: Security logs indicate that there were multiple failed login attempts on high-value accounts just days prior to the theft. These attempts originated from an IP address based in Russia, which has been associated with previous cyberattacks on financial institutions. Over a three-hour period, at least 20 failed login attempts were recorded before the attacker successfully accessed an employee's account. The login patterns suggest the use of credential-stuffing techniques, where various email-password combinations are tried based on previous data breaches. Although the security team flagged these attempts, they did not trigger an account lockout due to the distributed nature of the attack ([case_3.txt]).\n\n2. **Phishing Attack**: The theft was executed through a sophisticated phishing attack that targeted an employee. The attacker sent an email that appeared to be from the exchange\u2019s IT security team, containing a link to a fake login page. The employee entered their credentials, which were then sent to the attacker. This access was logged from an unfamiliar IP address. The phishing domain was registered just two days before the attack, closely resembling the exchange's actual website, differing by only a single character. The phishing site was taken down within 24 hours, but the funds had already been transferred ([case_1.txt]).\n\n## Assessment & Leads\nThe evidence suggests a coordinated effort involving both credential-stuffing attempts and a phishing attack. The Russian IP address linked to the failed login attempts could be a significant lead for further investigation into the source of the attack. Additionally, the rapid registration of the phishing domain warrants scrutiny to identify any potential connections to the attackers.\n\n## Evidence Gaps\nWhile the evidence provides insight into the suspicious login activity and the phishing attack, it does not specify the exact timing of the theft in relation to the failed login attempts. Further details on the timeline of these events could enhance understanding of the attack's execution. Additionally, there is no information on whether any further security measures were implemented following the flagged login attempts."
+  },
+  {
+    "query": "Which mixing services were used to hide the money trail?",
+    "relevant": [
+      "case_5"
+    ],
+    "evidence": [
+      [
+        "case_5",
+        0.4866
+      ],
+      [
+        "case_2",
+        0.4484
+      ]
+    ],
+    "excluded": [
+      [
+        "case_6",
+        0.3753
+      ],
+      [
+        "case_3",
+        0.3316
+      ],
+      [
+        "case_4",
+        0.2838
+      ],
+      [
+        "case_8",
+        0.2633
+      ]
+    ],
+    "retrieval": {
+      "recall": 1.0,
+      "distractor_rejection": 0.8,
+      "top1_relevant": true,
+      "missed": [],
+      "leaked_distractors": [
+        "case_2"
+      ]
+    },
+    "citations": {
+      "has_citations": true,
+      "valid_citations": [
+        "case_2.txt",
+        "case_5.txt"
+      ],
+      "cites_excluded_docs": [],
+      "cites_unknown_docs": [],
+      "citation_coverage": 1.0
+    },
+    "report": "## Executive Summary\nThe investigation into the money laundering activities related to the stolen cryptocurrency reveals the use of Tornado Cash as a primary mixing service. The stolen funds were initially transferred to an anonymous Solana blockchain wallet before being funneled through Tornado Cash, which obscured the origin of the funds and complicated tracing efforts.\n\n## Evidence Analysis\n1. **Tornado Cash**: The stolen cryptocurrency was quickly moved through Tornado Cash, a decentralized mixer designed to obscure the origin of funds. This service allows users to send tokens into a smart contract that redistributes the funds to new addresses, making it challenging to trace the original transaction. The security team of the exchange observed that within 30 minutes of the initial theft, the funds were funneled into multiple transactions through Tornado Cash, each structured for maximum anonymity [case_5.txt].\n\n2. **Solana Wallet**: Prior to being mixed through Tornado Cash, the stolen funds were first transferred to an anonymous wallet on the Solana blockchain. This wallet was flagged for links to previous fraudulent activities, and the funds were split into multiple smaller amounts almost immediately after receipt. This tactic is often used in money laundering to further complicate tracking efforts [case_2.txt].\n\n## Assessment & Leads\n- The use of Tornado Cash indicates a sophisticated approach to laundering the stolen cryptocurrency, as it provides a high level of anonymity.\n- The initial transfer to an anonymous Solana wallet suggests a layered strategy to obfuscate the money trail, which may warrant further investigation into the wallet's history and its connections to other fraudulent activities.\n\n## Evidence Gaps\n- There is no information on additional mixing services that may have been used beyond Tornado Cash and the Solana wallet.\n- The documents do not provide details on the unknown exchange through which the funds were eventually withdrawn, which could be crucial for further tracing the money trail."
+  }
+]

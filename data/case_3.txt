@@ -1,0 +1,5 @@
+Security logs revealed that multiple failed login attempts had been made on high-value accounts just days before the attack. The attempts originated from an IP address based in Russia.
+
+The same IP address had been linked to previous cyberattacks against financial institutions. Over a span of three hours, at least 20 failed login attempts were recorded before the attacker successfully breached an employee's account.
+
+An analysis of the login patterns suggests the use of credential-stuffing techniques, where attackers attempt various email-password combinations obtained from previous data breaches. The exchange’s security team had flagged the attempts, but they did not initially trigger an account lockout due to the distributed nature of the attack.

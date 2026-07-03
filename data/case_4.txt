@@ -1,0 +1,5 @@
+A cybersecurity firm reported an increase in malware infections targeting corporate devices. The malware was designed to capture keystrokes and send them to remote servers.
+
+Investigators found evidence that some of the malware-infected devices belonged to financial institutions. However, there is no direct link between this malware and the stolen cryptocurrency funds.
+
+Experts believe the malware campaign was orchestrated by a well-known hacker group, but its primary targets were banking institutions rather than crypto exchanges.

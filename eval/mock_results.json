@@ -1,0 +1,48 @@
+{
+  "query": "How were the stolen funds laundered?",
+  "sub_queries": [
+    "stolen funds laundering path",
+    "crypto mixer Tornado Cash evidence",
+    "Solana wallet fund movement"
+  ],
+  "evidence": [
+    {
+      "id": "case_funds",
+      "source": "case_funds.txt",
+      "confidence": 0.88,
+      "reason": "Contains laundering evidence involving Solana and Tornado Cash."
+    }
+  ],
+  "excluded": [
+    {
+      "id": "case_noise",
+      "source": "case_noise.txt",
+      "confidence": 0.32,
+      "reason": "Does not contain evidence relevant to the detective question."
+    },
+    {
+      "id": "case_access",
+      "source": "case_access.txt",
+      "confidence": 0.26,
+      "reason": "Does not contain evidence relevant to the detective question."
+    }
+  ],
+  "retrieval_metrics": {
+    "recall": 1.0,
+    "distractor_rejection": 1.0,
+    "top1_relevant": true,
+    "missed": [],
+    "leaked_distractors": []
+  },
+  "citation_metrics": {
+    "has_citations": true,
+    "valid_citations": [
+      "case_funds.txt"
+    ],
+    "cites_excluded_docs": [],
+    "cites_unknown_docs": [],
+    "citation_coverage": 1.0
+  },
+  "report_retry_used": true,
+  "report": "## Executive Summary\n\nThe stolen funds moved through Tornado Cash after reaching a Solana wallet [case_funds.txt].\n\n## Evidence Analysis\n\nThe evidence supports a laundering path involving Solana and Tornado Cash [case_funds.txt].\n\n## Assessment & Leads\n\nInvestigators should trace the Solana wallet and downstream mixer outputs [case_funds.txt].\n\n## Evidence Gaps\n\nThe final cash-out exchange is not identified in the mock evidence [case_funds.txt]."
+}

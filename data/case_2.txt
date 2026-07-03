@@ -1,0 +1,5 @@
+The stolen funds were first moved to an anonymous Solana blockchain wallet. Investigators noticed that the transactions were broken into multiple smaller amounts, making it harder to track the total sum.
+
+Blockchain analysis tools flagged the wallet as having links to previous fraudulent activities. Within ten minutes of receiving the stolen funds, the wallet split them into multiple new addresses, each receiving smaller amounts.
+
+The hacker likely used an automated script to rapidly distribute the funds. This method is commonly employed in money laundering cases to make tracing transactions significantly more difficult.

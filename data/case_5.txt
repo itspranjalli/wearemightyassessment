@@ -1,0 +1,5 @@
+The stolen cryptocurrency was quickly moved through Tornado Cash, a decentralized mixer used to obscure the origin of funds. Tornado Cash allows users to send tokens into a smart contract, which then redistributes the funds to new addresses, making it difficult to trace the original transaction.
+
+The exchange’s security team noticed that within 30 minutes of the initial theft, the funds were funneled into multiple Tornado Cash transactions. Each transaction was structured to ensure maximum anonymity.
+
+Authorities suspect that the hacker intended to cash out through peer-to-peer trading platforms. Blockchain analysis identified at least five intermediary wallets that received the laundered funds before they were withdrawn via an unknown exchange.

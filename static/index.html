@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Evidence Retrieval System</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --panel: #12171f;
+    --panel-2: #1a212c;
+    --border: #263041;
+    --border-soft: #1d2634;
+    --text: #e9eef5;
+    --muted: #7d8899;
+    --accent: #e8b339;
+    --accent-2: #f5d67a;
+    --accent-soft: rgba(232, 179, 57, 0.12);
+    --accent-border: rgba(232, 179, 57, 0.35);
+    --green: #46c55a;
+    --amber: #d9a62e;
+    --red: #f4655c;
+    --mono: "SF Mono", ui-monospace, "Cascadia Code", Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background:
+      radial-gradient(ellipse 900px 400px at 75% -10%, rgba(232,179,57,0.07), transparent),
+      radial-gradient(ellipse 700px 500px at 0% 110%, rgba(70,130,200,0.05), transparent),
+      var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    border-bottom: 1px solid var(--border-soft);
+    background: rgba(18, 23, 31, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header .badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-soft), rgba(232,179,57,0.25));
+    border: 1px solid var(--accent-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px;
+    box-shadow: 0 0 24px rgba(232,179,57,0.15);
+  }
+  header h1 {
+    font-size: 19px; font-weight: 700; letter-spacing: -0.01em;
+    background: linear-gradient(90deg, var(--text), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  header p { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  .status-dot {
+    margin-left: auto; display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+  .status-dot::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); box-shadow: 0 0 8px var(--green);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 26px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 28px 32px 64px;
+  }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  aside {
+    align-self: start;
+    position: sticky;
+    top: 104px;
+  }
+  .side-panel {
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  aside h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  aside h2 .count {
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid var(--accent-border);
+    font-size: 11px; padding: 2px 9px; border-radius: 999px;
+    letter-spacing: 0;
+  }
+  .case-item {
+    padding: 10px 12px; border-radius: 9px; margin-bottom: 7px;
+    background: var(--panel-2); border: 1px solid transparent;
+    font-size: 12.5px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .case-item:hover { border-color: var(--accent-border); transform: translateX(2px); }
+  .case-item .name { color: var(--accent); font-weight: 650; font-size: 12px; font-family: var(--mono); }
+  .case-item .preview { color: var(--muted); margin-top: 4px; line-height: 1.45; display: block; }
+
+  .query-box {
+    background: linear-gradient(180deg, var(--panel), rgba(18,23,31,0.6));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
+  .query-box label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); display: block; margin-bottom: 12px; font-weight: 650;
+  }
+  .query-row { display: flex; gap: 12px; }
+  #query {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); padding: 14px 16px;
+    font-size: 15px; outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  #query:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  #query::placeholder { color: #4d5768; }
+  #ask {
+    background: linear-gradient(135deg, var(--accent), #d09a1f);
+    color: #1a1200; border: none;
+    border-radius: 10px; padding: 14px 26px; font-size: 14px;
+    font-weight: 700; cursor: pointer; white-space: nowrap;
+    transition: transform 0.12s, box-shadow 0.12s;
+    box-shadow: 0 4px 16px rgba(232,179,57,0.25);
+  }
+  #ask:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(232,179,57,0.35); }
+  #ask:active { transform: translateY(0); }
+  #ask:disabled { opacity: 0.5; cursor: wait; transform: none; }
+  .examples { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .examples span { font-size: 12px; color: var(--muted); margin-right: 2px; }
+  .example {
+    background: transparent; border: 1px dashed var(--border);
+    color: var(--muted); font-size: 12px; padding: 6px 12px;
+    border-radius: 999px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .example:hover { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+  .status { margin-top: 14px; font-size: 13px; color: var(--muted); display: none; }
+  .status.error { color: var(--red); }
+  .spinner {
+    display: inline-block; width: 13px; height: 13px; margin-right: 9px;
+    border: 2px solid var(--border); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+    vertical-align: -2px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  section.results { display: none; }
+  .section-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin: 26px 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .step {
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid var(--accent-border);
+    width: 22px; height: 22px; border-radius: 7px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 11px; letter-spacing: 0;
+  }
+  .section-title::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--border-soft), transparent);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+  .chip {
+    background: var(--accent-soft); color: var(--accent-2);
+    border: 1px solid var(--accent-border);
+    padding: 7px 14px; border-radius: 999px; font-size: 12.5px;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--border-soft);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 14px;
+    animation: rise 0.4s ease both;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--border); }
+  .card.excluded { opacity: 0.6; background: rgba(18,23,31,0.5); }
+  .card.excluded:hover { opacity: 0.85; }
+  .card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+  .card-head .source { font-weight: 700; font-size: 13.5px; color: var(--accent); font-family: var(--mono); }
+  .conf-bar-wrap {
+    flex: 1; min-width: 150px; height: 7px; background: var(--panel-2);
+    border-radius: 999px; overflow: hidden;
+  }
+  @keyframes growBar { from { width: 0; } }
+  .conf-bar {
+    height: 100%; border-radius: 999px;
+    animation: growBar 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .conf-label { font-size: 13.5px; font-weight: 700; min-width: 52px; text-align: right; font-family: var(--mono); }
+  .tag {
+    font-size: 10.5px; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--border); color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 650;
+  }
+  .tag.evidence { color: var(--green); border-color: rgba(70,197,90,0.35); background: rgba(70,197,90,0.08); }
+  .tag.low { color: var(--red); border-color: rgba(244,101,92,0.35); background: rgba(244,101,92,0.08); }
+  .card .text { font-size: 13.5px; color: #c7d0dc; line-height: 1.6; white-space: pre-wrap; }
+  .reason {
+    margin-top: 12px; font-size: 12.5px; line-height: 1.5;
+    padding: 9px 12px; border-radius: 8px;
+  }
+  .reason.keep { background: rgba(70,197,90,0.07); color: #9fd8a9; border-left: 2px solid var(--green); }
+  .reason.drop { background: rgba(244,101,92,0.07); color: #e8a29d; border-left: 2px solid var(--red); }
+  .matched { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .matched b { color: #aeb9c8; font-weight: 600; }
+
+  .report {
+    background: linear-gradient(180deg, var(--panel), rgba(18,23,31,0.7));
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 14px; padding: 26px 30px; font-size: 14px; line-height: 1.7;
+    animation: rise 0.4s ease both;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .report h2 {
+    font-size: 16px; margin: 22px 0 10px; color: var(--accent);
+    padding-bottom: 6px; border-bottom: 1px solid var(--border-soft);
+  }
+  .report h2:first-child { margin-top: 0; }
+  .report h3 { font-size: 14.5px; margin: 16px 0 6px; color: var(--accent-2); }
+  .report p { margin: 9px 0; color: #d4dce6; }
+  .report ul, .report ol { margin: 9px 0 9px 24px; }
+  .report li { margin: 5px 0; color: #d4dce6; }
+  .report code {
+    background: var(--panel-2); padding: 2px 7px; border-radius: 5px;
+    font-size: 12.5px; color: var(--accent-2); font-family: var(--mono);
+  }
+  .report strong { color: var(--accent-2); }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">&#128269;</div>
+  <div>
+    <h1>Case Evidence Retrieval System</h1>
+    <p>Vector search over case files &middot; multi-step retrieval &middot; AI investigation reports</p>
+  </div>
+  <div class="status-dot">system online</div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="side-panel">
+      <h2>Evidence Corpus <span class="count" id="corpus-count">&hellip;</span></h2>
+      <div id="case-list"><span style="color:var(--muted);font-size:12.5px">Loading&hellip;</span></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="query-box">
+      <label for="query">Detective's Query</label>
+      <div class="query-row">
+        <input id="query" type="text" placeholder="Ask anything about the case&hellip;" />
+        <button id="ask">Investigate</button>
+      </div>
+      <div class="examples" id="examples">
+        <span>Try:</span>
+        <button class="example">How did the hacker gain access to the exchange?</button>
+        <button class="example">How were the stolen funds laundered?</button>
+        <button class="example">Was there a ransom demand?</button>
+      </div>
+      <div class="status" id="status"></div>
+    </div>
+
+    <section class="results" id="results">
+      <div class="section-title"><span class="step">1</span> Expanded Sub-Queries</div>
+      <div class="chips" id="sub-queries"></div>
+
+      <div class="section-title"><span class="step">2</span> Retrieved Evidence &mdash; ranked by confidence</div>
+      <div id="evidence"></div>
+
+      <div id="excluded-wrap" style="display:none">
+        <div class="section-title"><span class="step">&#10005;</span> Excluded Documents &mdash; judged unrelated to this query</div>
+        <div id="excluded"></div>
+      </div>
+
+      <div class="section-title"><span class="step">3</span> Investigation Report</div>
+      <div class="report" id="report"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+function confColor(c) {
+  if (c >= 0.55) return "var(--green)";
+  if (c >= 0.4) return "var(--amber)";
+  return "var(--red)";
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Minimal markdown renderer (headings, bold, italics, lists, code, paragraphs)
+function renderMarkdown(md) {
+  const lines = escapeHtml(md).split("\n");
+  let html = "", inList = false;
+  const inline = (s) => s
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+    .replace(/\[([\w\-. ]+\.txt)\]/g, "<code>$1</code>");
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    const list = line.match(/^\s*[-*]\s+(.*)/);
+    const olist = line.match(/^\s*\d+\.\s+(.*)/);
+    if (list || olist) {
+      if (!inList) { html += "<ul>"; inList = true; }
+      html += "<li>" + inline((list || olist)[1]) + "</li>";
+      continue;
+    }
+    if (inList) { html += "</ul>"; inList = false; }
+    if (/^###\s/.test(line)) html += "<h3>" + inline(line.slice(4)) + "</h3>";
+    else if (/^##\s/.test(line)) html += "<h2>" + inline(line.slice(3)) + "</h2>";
+    else if (/^#\s/.test(line)) html += "<h2>" + inline(line.slice(2)) + "</h2>";
+    else if (line.trim() === "") html += "";
+    else html += "<p>" + inline(line) + "</p>";
+  }
+  if (inList) html += "</ul>";
+  return html;
+}
+
+function evidenceCard(e, excluded, index) {
+  const pct = Math.round(e.confidence * 100);
+  const barColor = excluded ? "#4d5768" : confColor(e.confidence);
+  const best = e.matched_by.slice(0, 2)
+    .map(m => `<b>${escapeHtml(m.query)}</b> (${(m.similarity * 100).toFixed(1)}%)`)
+    .join(" &middot; ");
+  const reason = e.reason
+    ? `<div class="reason ${excluded ? "drop" : "keep"}">${excluded ? "&#9888;&#65039; Why excluded" : "&#10003; Relevance"}: ${escapeHtml(e.reason)}</div>`
+    : "";
+  return `
+    <div class="card ${excluded ? "excluded" : ""}" style="animation-delay:${index * 70}ms">
+      <div class="card-head">
+        <span class="source">&#128193; ${escapeHtml(e.source)}</span>
+        <div class="conf-bar-wrap"><div class="conf-bar" style="width:${pct}%;background:${barColor}"></div></div>
+        <span class="conf-label" style="color:${barColor}">${pct}%</span>
+        ${excluded ? '<span class="tag low">excluded</span>' : '<span class="tag evidence">evidence</span>'}
+      </div>
+      <div class="text">${escapeHtml(e.text)}</div>
+      ${reason}
+      <div class="matched">Best matched by: ${best}</div>
+    </div>`;
+}
+
+async function loadCases() {
+  try {
+    const res = await fetch("/api/cases");
+    const data = await res.json();
+    $("corpus-count").textContent = data.count + " files";
+    $("case-list").innerHTML = data.cases.map(c => `
+      <div class="case-item">
+        <span class="name">${escapeHtml(c.source)}</span>
+        <span class="preview">${escapeHtml(c.preview)}&hellip;</span>
+      </div>`).join("") || '<span style="color:var(--muted);font-size:12.5px">No documents ingested yet.</span>';
+  } catch {
+    $("corpus-count").textContent = "offline";
+    $("case-list").innerHTML = '<span style="color:var(--muted);font-size:12.5px">Corpus unavailable.</span>';
+  }
+}
+
+async function investigate() {
+  const query = $("query").value.trim();
+  if (query.length < 3) return;
+  const status = $("status");
+  $("ask").disabled = true;
+  status.className = "status";
+  status.style.display = "block";
+  status.innerHTML = '<span class="spinner"></span>Expanding query &rarr; searching evidence &rarr; grading relevance &rarr; drafting report&hellip;';
+  $("results").style.display = "none";
+
+  try {
+    const res = await fetch("/api/investigate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      // FastAPI validation errors return detail as an array of objects;
+      // other errors return a string. Normalise to a readable message.
+      const d = data.detail;
+      const msg = Array.isArray(d) ? d.map(e => e.msg).join("; ")
+                : (typeof d === "string" ? d : "Request failed");
+      throw new Error(msg);
+    }
+
+    $("sub-queries").innerHTML = data.sub_queries.map(q => `<span class="chip">${escapeHtml(q)}</span>`).join("")
+      || '<span class="chip">No expansion needed</span>';
+    $("evidence").innerHTML = data.evidence.map((e, i) => evidenceCard(e, false, i)).join("")
+      || '<div class="card"><div class="text">No documents met the relevance bar for this query.</div></div>';
+    $("excluded").innerHTML = data.excluded.map((e, i) => evidenceCard(e, true, i)).join("");
+    $("excluded-wrap").style.display = data.excluded.length ? "block" : "none";
+    $("report").innerHTML = renderMarkdown(data.report);
+    $("results").style.display = "block";
+    status.style.display = "none";
+  } catch (err) {
+    status.className = "status error";
+    status.textContent = "Error: " + err.message;
+  } finally {
+    $("ask").disabled = false;
+  }
+}
+
+$("ask").addEventListener("click", investigate);
+$("query").addEventListener("keydown", (e) => { if (e.key === "Enter") investigate(); });
+$("examples").addEventListener("click", (e) => {
+  if (e.target.classList.contains("example")) {
+    $("query").value = e.target.textContent;
+    investigate();
+  }
+});
+loadCases();
+</script>
+</body>
+</html>

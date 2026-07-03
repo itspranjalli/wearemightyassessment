@@ -1,0 +1,5 @@
+A ransom note demanding Bitcoin was sent to the exchange’s customer support team shortly after the attack. The message threatened to release sensitive customer data unless the ransom was paid within 48 hours.
+
+The hacker included a small sample of leaked customer information as proof of the breach. The email was sent from a temporary, encrypted email service commonly used by cybercriminals.
+
+Investigators suspect that the ransom demand was either a diversionary tactic or an additional extortion attempt. The exchange did not comply with the ransom demand, and security teams worked to mitigate any potential data leaks.

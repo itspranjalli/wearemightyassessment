@@ -1,0 +1,5 @@
+A minor security breach occurred two weeks before the crypto exchange hack. An unauthorized third party accessed an internal database containing non-sensitive customer metadata.
+
+The breach was quickly detected, and the database was secured within hours. No financial data or login credentials were compromised.
+
+While the incident raised concerns, security analysts determined that it had no direct connection to the recent cryptocurrency theft.

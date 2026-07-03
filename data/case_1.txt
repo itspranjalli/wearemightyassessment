@@ -1,0 +1,5 @@
+The hacker executed a sophisticated phishing attack to gain access to an employee’s wallet credentials. The attack started with an email that appeared to come from the exchange’s IT security team. The email contained a link to a fake login page that mimicked the exchange’s internal portal.
+
+The employee unknowingly entered their credentials, which were immediately sent to the attacker. Within minutes, the hacker used the stolen credentials to access the employee’s wallet and transfer funds. Logs indicate that the login was performed from an unfamiliar IP address.
+
+Further investigation revealed that the phishing domain had been registered just two days before the attack. The domain name closely resembled the exchange’s actual website, differing only by a single character. The phishing site was taken down within 24 hours, but by then, the funds had already been moved.
