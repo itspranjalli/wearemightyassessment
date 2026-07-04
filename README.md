@@ -6,8 +6,6 @@ For architecture, design decisions, evaluation rationale, and system design
 round material, see:
 
 - [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md)
-- [docs/system_design_presentation_report.md](docs/system_design_presentation_report.md)
-- [docs/system_design_presentation_report.pdf](docs/system_design_presentation_report.pdf)
 
 ## Prerequisites
 
